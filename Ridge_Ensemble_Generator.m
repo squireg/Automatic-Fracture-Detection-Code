@@ -72,7 +72,8 @@ rows = 1000;
 cols = 1000;
 
 % specify folder where shearlet systems are saved 
-outfolder = 'D:\Github_Test\';
+outfolder = './Github_Test/';
+mkdir(outfolder);
 
 % loop to compute all combinations of shearlet systems
 tic
@@ -111,7 +112,8 @@ RidgeExtract_Combs =[ce(:),cf(:)];
 %no_Shearlets = length(Shearlet_Combs); 
 
 % if a number of shearlets have already been chosen
-no_Shearlets =70;
+%no_Shearlets =70;
+no_Shearlets =3; % (Geoff) to match loop on line 79
 
 % total number or ridge realizations 
 total_combs = length(RidgeExtract_Combs) * no_Shearlets;
@@ -151,10 +153,12 @@ n = 1000;  % columns specified when the shearlet system was built
 num_images = length(InFileList); % number of images that are selected
 
 % specify folder where shearlet systems are saved 
-outfolder = 'D:\Github_Test\';
+outfolder = './Github_Test/';
+mkdir(outfolder);
 
 % Specify folder where the ridge ensembles are to be saved
-output_folder = 'D:\Github_Test\P_Ridges\';
+output_folder = './Github_Test/P_Ridges/';
+mkdir(output_folder);
 
 % Loop runs over each image
  for k=1:length(InFileList)

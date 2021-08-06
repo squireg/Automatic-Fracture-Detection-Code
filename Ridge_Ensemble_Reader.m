@@ -79,7 +79,7 @@ title(['Normalized Ridge Intensity Threshold: ',num2str(threshold)])
 %  binarized image and save it
 
 % specify where file has to be saved
-outfolder ='D:\Github_Test\P_Ridges\';
+outfolder ='./Github_Test/P_Ridges/';
 imwrite(C_Ridges_norm_thresh,strcat(outfolder,'Bin_',InFileListShort{1}));
 
 %% if there are multiple images, for which a single threshold is to be applied
@@ -90,7 +90,7 @@ for i=1:length(InFileList)
  clearvars imageIN
 end
 
-output_folder ='D:\Github_Test\P_Ridges\';
+output_folder ='./Github_Test/P_Ridges/';
 
 for k=1:length(InFileList)
    tic

@@ -22,7 +22,7 @@ close all
 format compact
 
 %% select binarized ridge files to be opened
-    disp('Select multiple Ridges files (they must be in a single folder)');
+    disp('Select multiple binarized Ridges files (they must be in a single folder)');
     [InFileListShort, pathname] = uigetfile('*.jpg;*.tif;*.png','Select input image files','MultiSelect','on');
     
     if not(iscell(InFileListShort))
@@ -37,7 +37,7 @@ format compact
     addpath(genpath(funPath)); 
     
 %% select source images to create overlays for visual comparison
-    disp('Select multiple Ridges files (they must be in a single folder)');
+    disp('Select multiple source image files (they must be in a single folder)');
     [InFileListShort2, pathname2] = uigetfile('*.jpg;*.tif;*.png','Select input image files','MultiSelect','on');
     
     if not(iscell(InFileListShort2))
@@ -54,10 +54,10 @@ format compact
     
 %%  create directories to save images corresponding to post-processing steps
     
-%     mkdir(strcat(pathname,'Segmented_Ridges'))
-%     mkdir(strcat(pathname,'Segmented_Ridges_Overlay'))
-%     mkdir(strcat(pathname,'Skeletons'))
-%     mkdir(strcat(pathname,'Fitted_Curves'))
+     mkdir(strcat(pathname,'Segmented_Ridges'))
+     mkdir(strcat(pathname,'Segmented_Ridges_Overlay'))
+     mkdir(strcat(pathname,'Skeletons'))
+     mkdir(strcat(pathname,'Fitted_Curves'))
 
 %%  loop that performs the post-processing steps
 
@@ -149,12 +149,12 @@ for m = 1:size(InFileList,2)
    %imshow(imageIN_1)
    
    %  writing the segmented ridges and its overlay to the output folders
-   imwrite(imageIN_4, strcat(pathname,'Segmented_Ridges\',InFileListShort2{m}));
+   imwrite(imageIN_4, strcat(pathname,'Segmented_Ridges/',InFileListShort2{m}));
 
     
    % creating overlay of segmented ridges on the source image and saving it
    overlay_plus_segmented_ridges=CSHRMgetOverlay(imageIN_1,imageIN_4);
-   imwrite(overlay_plus_segmented_ridges, strcat(pathname,'Segmented_Ridges_Overlay\',InFileListShort2{m}));
+   imwrite(overlay_plus_segmented_ridges, strcat(pathname,'Segmented_Ridges_Overlay/',InFileListShort2{m}));
 
      
    % Skeletonizing the segmented ridges  and
@@ -173,7 +173,7 @@ for m = 1:size(InFileList,2)
    %  writing the skeletonized ridges to the output folders
    disp(['Writing the Skeletons for Image ' num2str(m) ' out of ' num2str(size(InFileList, 2))]);  
    skelImg2 = mat2gray(skelImg);
-   imwrite(~skelImg2, strcat(pathname,'Skeletons\',InFileListShort2{m}));
+   imwrite(~skelImg2, strcat(pathname,'Skeletons/',InFileListShort2{m}));
    
    % concatenating the clusters into one large matrix
     Clusters=Cluster_List{1,1};
@@ -245,7 +245,7 @@ for m = 1:size(InFileList,2)
        
     OutFileName = InFileListShort2{m};
     OutFileName = OutFileName(1:length(OutFileName)-4);
-    OutFileName = strcat(pathname,'Fitted_Curves\',OutFileName);
+    OutFileName = strcat(pathname,'Fitted_Curves/',OutFileName);
     disp(['Writing Polyline Points for Image ' num2str(m) ' out of ' num2str(size(InFileList, 2))]);
     save(OutFileName,'Poly_Points_Table');
    
