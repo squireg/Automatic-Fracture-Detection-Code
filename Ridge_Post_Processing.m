@@ -247,7 +247,8 @@ for m = 1:size(InFileList,2)
     OutFileName = OutFileName(1:length(OutFileName)-4);
     OutFileName = strcat(pathname,'Fitted_Curves/',OutFileName);
     disp(['Writing Polyline Points for Image ' num2str(m) ' out of ' num2str(size(InFileList, 2))]);
-    save(OutFileName,'Poly_Points_Table');
+    %save(OutFileName,'Poly_Points_Table');
+    writetable(Poly_Points_Table,OutFileName);
    
    else
       disp(['Image ' num2str(i) ' is empty. No Polylines to write' ]); 
